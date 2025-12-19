@@ -1,6 +1,6 @@
 // draggableNode.js
 
-export const DraggableNode = ({ type, label }) => {
+export const DraggableNode = ({ type, label, category }) => {
     const onDragStart = (event, nodeType) => {
       const appData = { nodeType }
       event.target.style.cursor = 'grabbing';
@@ -8,20 +8,20 @@ export const DraggableNode = ({ type, label }) => {
       event.dataTransfer.effectAllowed = 'move';
     };
 
-    // Color mapping for each node type
+    // Professional color scheme - muted and cohesive
     const colorMap = {
-      customInput: '#3b82f6',
-      customOutput: '#10b981',
-      llm: '#8b5cf6',
-      text: '#f59e0b',
-      api: '#ef4444',
-      database: '#14b8a6',
-      conditional: '#eab308',
-      transform: '#6366f1',
-      aggregator: '#10b981'
+      customInput: '#475569',      // Slate gray
+      customOutput: '#64748b',     // Slate gray (lighter)
+      llm: '#334155',              // Dark slate
+      text: '#475569',             // Slate gray
+      api: '#64748b',              // Slate gray (lighter)
+      database: '#475569',         // Slate gray
+      conditional: '#64748b',      // Slate gray (lighter)
+      transform: '#334155',        // Dark slate
+      aggregator: '#475569'        // Slate gray
     };
 
-    const nodeColor = colorMap[type] || '#3b82f6';
+    const nodeColor = colorMap[type] || '#475569';
   
     return (
       <div
@@ -31,24 +31,45 @@ export const DraggableNode = ({ type, label }) => {
         style={{ 
           cursor: 'grab', 
           minWidth: '100px', 
-          height: '50px',
+          height: '45px',
           display: 'flex', 
           alignItems: 'center', 
-          borderRadius: '8px',
-          background: `linear-gradient(135deg, ${nodeColor} 0%, ${nodeColor}dd 100%)`,
+          borderRadius: '6px',
+          background: '#ffffff',
           justifyContent: 'center', 
           flexDirection: 'column',
-          boxShadow: `0 4px 6px -1px ${nodeColor}40, 0 2px 4px -1px ${nodeColor}30`,
-          border: `2px solid ${nodeColor}`,
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08)',
+          border: '1px solid #e2e8f0',
           transition: 'all 0.2s ease',
           fontWeight: '500',
           fontSize: '13px'
         }} 
         draggable
-        onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
-        onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+        onMouseEnter={(e) => {
+          e.target.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)';
+          e.target.style.borderColor = '#cbd5e1';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08)';
+          e.target.style.borderColor = '#e2e8f0';
+        }}
       >
-          <span style={{ color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>{label}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ color: '#334155', fontWeight: '500', letterSpacing: '0.2px' }}>{label}</span>
+            {category && (
+              <span style={{
+                fontSize: '9px',
+                color: '#64748b',
+                background: '#f1f5f9',
+                padding: '2px 5px',
+                borderRadius: '3px',
+                fontWeight: '500',
+                letterSpacing: '0.3px'
+              }}>
+                {category}
+              </span>
+            )}
+          </div>
       </div>
     );
   };

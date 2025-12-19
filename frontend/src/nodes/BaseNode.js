@@ -49,8 +49,10 @@ export const BaseNode = ({
               key={`label-${id}-${handle.id || index}`}
               style={{
                 position: 'absolute',
-                left: handle.position === Position.Left ? '-80px' : 'auto',
-                right: handle.position === Position.Right ? '-80px' : 'auto',
+                ...(handle.position === Position.Left 
+                  ? { right: '100%', marginRight: '8px' }
+                  : { left: '100%', marginLeft: '8px' }
+                ),
                 top: handle.style?.top || '50%',
                 transform: 'translateY(-50%)',
                 fontSize: '10px',
@@ -63,9 +65,11 @@ export const BaseNode = ({
                 fontWeight: '500',
                 pointerEvents: 'none',
                 zIndex: 10,
-                width: '50px',          // Fixed width
-                textAlign: 'center'     // Center text
+                maxWidth: '120px',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
               }}
+              title={handle.label}
             >
               {handle.label}
             </div>

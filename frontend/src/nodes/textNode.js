@@ -75,7 +75,7 @@ export const TextNode = ({ id, data }) => {
       title="Text" 
       handles={handles}
       width={dimensions.width}
-      height={dimensions.height}
+      height={160}
       dynamic={true}
       color="#f59e0b">
     
