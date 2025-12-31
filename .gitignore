@@ -41,3 +41,8 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
